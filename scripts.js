@@ -137,8 +137,6 @@
         const typingTexts = [
             'Backend Engineer',
             'API Architect',
-            'ML Enthusiast',
-            'Open Source Contributor',
             'Problem Solver'
         ];
         let textIndex = 0;
