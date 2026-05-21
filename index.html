@@ -359,7 +359,7 @@
                         </div>
                     </div>
                     <!-- Slide 4 -->
-                    <div class="carousel-slide">
+                  <div class="carousel-slide">
                         <div class="project-card">
                             <div class="project-visual">
                                 <div class="project-mockup">
@@ -369,37 +369,46 @@
                                         <div class="mockup-dot green"></div>
                                     </div>
                                     <div class="mockup-body">
-<span class="code-comment"># Data Pipeline with Apache</span>
-<br><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd
-<br><span class="code-keyword">from</span> airflow <span class="code-keyword">import</span> DAG
-<br><span class="code-keyword">from</span> airflow.operators <span class="code-keyword">import</span> (
-<br>&nbsp;&nbsp;PythonOperator
-<br>)
+<span class="code-keyword">def</span> <span class="code-function">index</span>(request):
+<br>&nbsp;&nbsp;testimonials = Testimonial.objects.<span class="code-function">all</span>()
+<br>&nbsp;&nbsp;shipments = Shipment.objects.<span class="code-function">filter</span>(
+<br>&nbsp;&nbsp;&nbsp;&nbsp;sender=request.user
+<br>&nbsp;&nbsp;).<span class="code-function">order_by</span>(<span class="code-string">'-updated_at'</span>)
+<br>&nbsp;&nbsp;<span class="code-keyword">if</span> request.user.is_authenticated
+<br>&nbsp;&nbsp;<span class="code-keyword">else</span> []
+<br>&nbsp;&nbsp;context = {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'testimonials'</span>: testimonials,
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'shipments'</span>: shipments,
+<br>&nbsp;&nbsp;}
+<br>&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-function">render</span>(request, <span class="code-string">'master/index.html'</span>, context)
 <br>
-<br><span class="code-keyword">def</span> <span class="code-function">extract_data</span>(**ctx):
-<br>&nbsp;&nbsp;df = pd.<span class="code-function">read_sql</span>(query, conn)
-<br>&nbsp;&nbsp;<span class="code-keyword">return</span> df.<span class="code-function">to_dict</span>()
-<br>
-<br><span class="code-keyword">def</span> <span class="code-function">transform_data</span>(**ctx):
-<br>&nbsp;&nbsp;data = ctx[<span class="code-string">"ti"</span>].<span class="code-function">xcom_pull</span>()
-<br>&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-function">clean</span>(data)
+<br><span class="code-keyword">def</span> <span class="code-function">signup</span>(request):
+<br>&nbsp;&nbsp;<span class="code-keyword">if</span> request.method == <span class="code-string">'POST'</span>:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;form = <span class="code-function">SignupForm</span>(request.POST)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> form.<span class="code-function">is_valid</span>():
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user = form.<span class="code-function">save</span>()
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">login</span>(request, user)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-function">redirect</span>(<span class="code-string">'dashboard'</span>)
+<br>&nbsp;&nbsp;<span class="code-keyword">else</span>:
+<br>&nbsp;&nbsp;&nbsp;&nbsp;form = <span class="code-function">SignupForm</span>()
+<br>&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-function">render</span>(request, <span class="code-string">'master/signup.html'</span>, {<span class="code-string">'form'</span>: form})
                                     </div>
                                 </div>
                             </div>
                             <div class="project-info">
-                                <p class="project-tag">Data Engineering</p>
-                                <h3 class="project-name">DataForge — ETL Platform</h3>
-                                <p class="project-desc">An enterprise-grade ETL platform that processes millions of records daily. Features automated data quality checks, schema evolution handling, and real-time monitoring dashboards.</p>
+                                <p class="project-tag">Logi App</p>
+                                <h3 class="project-name">FastLogistics — Dispatch and Delivery Services</h3>
+                                <p class="project-desc">A modern dispatch and delivery platform that processes thousands of shipments, goods and parcels daily. Features automated backend, shipment handling, real-time tracking, invoice generation, and admin dashboard.</p>
                                 <div class="tech-stack">
-                                    <span class="tech-tag">Apache Airflow</span>
-                                    <span class="tech-tag">Pandas</span>
-                                    <span class="tech-tag">Spark</span>
-                                    <span class="tech-tag">S3</span>
-                                    <span class="tech-tag">Grafana</span>
+                                    <span class="tech-tag">Javascript</span>
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">PostgreSQL</span>
                                 </div>
                                 <div class="project-links">
                                     <a href="#" class="project-link"><span><i class="fa-solid fa-link"></i> Live Demo</span></a>
-                                    <a href="#" class="project-link"><span><i class="fa-solid fa-folder-open"></i> GitHub</span></a>
+                                    <a href="#" class="https://github.com/oludev/logistics.git"><span><i class="fa-solid fa-folder-open"></i> GitHub</span></a>
                                 </div>
                             </div>
                         </div>
