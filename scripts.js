@@ -135,8 +135,8 @@
 
         // ========== TYPING EFFECT ==========
         const typingTexts = [
-            'Backend Engineer',
-            'API Architect',
+            'Backend Maestro',
+            'Frontend Engineer',
             'Problem Solver'
         ];
         let textIndex = 0;
